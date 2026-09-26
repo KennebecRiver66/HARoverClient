@@ -23,6 +23,11 @@ jobs:
       - uses: hacs/action@main
         with:
           category: integration
+          # TODO(#1): remove this once the integration is accepted into
+          # home-assistant/brands. Until then the brands check can only fail,
+          # because it needs artwork submitted to that upstream repository -
+          # nothing in this repo can satisfy it. Every other HACS check is live.
+          ignore: brands
 
   ruff:
     name: Ruff

@@ -52,7 +52,9 @@ class RoverConfigFlow(ConfigFlow, domain=DOMAIN):
             return {"base": "blocked"}
         except RoverConnectionError:
             return {"base": "cannot_connect"}
-        except Exception:  # noqa: BLE001 - a config flow must never leak a traceback
+        # Ruff allows this blind except because the exception is logged below;
+        # a config flow must never leak a traceback into the user's form.
+        except Exception:
             _LOGGER.exception("Unexpected error validating the Rover cookie")
             return {"base": "unknown"}
         return {}
